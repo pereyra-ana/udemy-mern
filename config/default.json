@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://usr_test:usr_test@merntestconnector-gz5da.mongodb.net/MernTestConnector?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "4c18c03e204fd94ab80e",
+    "githubSecret": "14fcff38d0adf181e0433301bd3f5ef645acfd4d"
+}
