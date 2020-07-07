@@ -11,7 +11,7 @@ const bcrypt = require('bcryptjs');
 // @desc Test route
 // @access Public
 // uso -auth- como segundo param como interceptor
-router.get('/', auth, async(req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select("-password") // no quiero que me traiga la password
         res.json(user);
@@ -26,11 +26,10 @@ router.get('/', auth, async(req, res) => {
 // @access Public
 router.post(
     '/', [
-        check('email', 'Please include a valid email').isEmail(),
-        check('password', 'Password is required').exists(),
-    ],
-    async(req, res) => {
-        console.log(req.body);
+    check('email', 'Please include a valid email').isEmail(),
+    check('password', 'Password is required').exists(),
+],
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // si hay errores mando un 400 y devuelvo los errores en el response
@@ -69,13 +68,12 @@ router.post(
             jwt.sign(
                 payload,
                 config.get('jwtSecret'), {
-                    expiresIn: 36000000, // 3600 es un valor productivo
-                },
+                expiresIn: 36000000, // 3600 es un valor productivo
+            },
                 (err, token) => {
                     if (err) {
                         throw err;
                     }
-                    console.log(token);
                     res.json({ token });
                 }
             );

@@ -22,15 +22,14 @@ router.get('/', (req, res) => res.send('User route'));
 // es public porque no necesita token
 router.post(
     '/', [
-        check('name', 'Name is required').not().isEmpty(),
-        check('email', 'Please include a valid email').isEmail(),
-        check(
-            'password',
-            'Please enter a password with six or more char'
-        ).isLength({ min: 6 }),
-    ],
-    async(req, res) => {
-        console.log(req.body);
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check(
+        'password',
+        'Please enter a password with six or more char'
+    ).isLength({ min: 6 }),
+],
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // si hay errores mando un 400 y devuelvo los errores en el response
@@ -67,7 +66,6 @@ router.post(
             const salt = await bcrypt.genSalt(10); // 10 is recommended in documentation
             user.password = await bcrypt.hash(password, salt); // this creates the hash
 
-            console.log(user);
             await user.save(); // uso await-async en lugar de .then porque es la forma cool ahre
 
             // return jwt
@@ -80,13 +78,12 @@ router.post(
             jwt.sign(
                 payload,
                 config.get('jwtSecret'), {
-                    expiresIn: 36000000, // 3600 es un valor productivo
-                },
+                expiresIn: 36000000, // 3600 es un valor productivo
+            },
                 (err, token) => {
                     if (err) {
                         throw err;
                     }
-                    console.log(token);
                     res.json({ token });
                 }
             );
