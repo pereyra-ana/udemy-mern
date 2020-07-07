@@ -39,7 +39,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             youtube: loading || !profile.social ? '' : profile.youtube,
             instagram: loading || !profile.social ? '' : profile.instagram
         });
-    }, [loading]);// pongo los corchetes para evitar que siga cargando siempre, que solo cargue cuando loading es true
+    }, [loading, getCurrentProfile]);// pongo los corchetes para evitar que siga cargando siempre, que solo cargue cuando loading es true
 
     const {
         company,
